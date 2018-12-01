@@ -70,7 +70,7 @@ const struct driver hw_arduino = {
 	.readdata	= NULL,
 	.api_version	= 4,
 	.driver_version = "0.9.3",
-	.info		= "See file://" PLUGINDOCS "/arduino.html"
+	.info		= "See file:///arduino.html"
 };
 
 

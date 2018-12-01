@@ -10,18 +10,20 @@
 
 driver          = arduino
 
-CFLAGS          += $(shell pkg-config --cflags lirc-driver)
+CFLAGS          += $(shell pkg-config --cflags lirc-driver) -D HAVE_KERNEL_LIRC_H=1
 LDFLAGS         += $(shell pkg-config --libs lirc-driver)
 PLUGINDIR       ?= $(shell pkg-config --variable=plugindir lirc-driver)
 CONFIGDIR       ?= $(shell pkg-config --variable=configdir lirc-driver)
 PLUGINDOCS      ?= $(shell pkg-config --variable=plugindocs lirc-driver)
+
+CC=$(CROSS_COMPILE)gcc
 
 all:  $(driver).so
 
 $(driver).o: $(driver).c
 
 $(driver).so: $(driver).o
-	gcc --shared -fpic $(LDFLAGS) -o $@ $<
+	$(CC) --shared -fpic $(LDFLAGS) -o $@ $<
 
 install: $(driver).so
 	install $< $(PLUGINDIR)
