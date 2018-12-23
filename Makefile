@@ -27,7 +27,7 @@ $(driver).so: $(driver).o
 
 install: $(driver).so
 	install $< $(PLUGINDIR)
-	install $(driver).conf $(CONFIGDIR)
+	install $(driver)-serial.conf $(CONFIGDIR)
 	install $(driver).html $(PLUGINDOCS)
 
 clean:
