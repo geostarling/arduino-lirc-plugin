@@ -4,7 +4,7 @@
 #
 # receive keycodes input via /dev/
 #
-# Copyright (C) 2016 Jiri Spacek <spaceji3@fit.cvut.cz>
+# Copyright (C) 2016-2019 Jiri Spacek <spaceji3@fit.cvut.cz>
 #
 # Distribute under GPL version 2 or later.
 
@@ -26,9 +26,9 @@ $(driver).so: $(driver).o
 	$(CC) --shared -fpic $(LDFLAGS) -o $@ $<
 
 install: $(driver).so
-	install $< $(PLUGINDIR)
-	install $(driver)-serial.conf $(CONFIGDIR)
-	install $(driver).html $(PLUGINDOCS)
+	install -D -t $(PLUGINDIR) $<
+	install -D -t $(CONFIGDIR) $(driver)-serial.conf
+	install -D -t $(PLUGINDOCS) $(driver).html
 
 clean:
 	rm -f *.o *.so
